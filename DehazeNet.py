@@ -8,7 +8,7 @@ import os
 from skimage.metrics import structural_similarity
 from openpyxl import load_workbook
 
-from CLAHE import apply_CLAHE
+from util.CLAHE import apply_CLAHE
 from FADE import FADE as compute_fade
 
 
