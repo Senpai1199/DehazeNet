@@ -1,7 +1,7 @@
 '''
     Script to compute Red, Green, Blue channel metrics such as standard deviation
     and mean pixel brightness values. Also contains code for plotting and storing histograms for 
-    the three channel pixel brighntess values separately for each image.
+    the three channel pixel brighntess values separately for each input image.
 '''
 # import cv2
 import os
