@@ -10,7 +10,7 @@
 import numpy as np
 
 
-def get_path(input_image):
+def get_path(input_image, threshold=144):
     im_array = np.array(input_image)
 
     red_chan = np.ndarray.flatten(im_array[:, :, 0])
@@ -25,7 +25,7 @@ def get_path(input_image):
     green_range = np.amax(green_chan)
     blue_range = np.amax(blue_chan)
 
-    pixel_threshold = 155  # threshold pixel brightness value (trial and error)
+    pixel_threshold = threshold  # threshold pixel brightness value (trial and error)
     pixel_range_threshold = 98
 
     red_c1 = mean_red > pixel_threshold
