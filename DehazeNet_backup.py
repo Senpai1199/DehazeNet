@@ -103,7 +103,7 @@ if __name__ == '__main__':
     else:
         im_path = sys.argv[1]
     src = cv2.imread(im_path)
-    path = get_path(src, threshold=144)  # 144 gives the best accuracy so far
+    path = get_path(src, threshold=142)  # 142 gives the best accuracy so far
     if path == 1:
         dehazed_image = apply_CLAHE(src)
     else:
