@@ -10,7 +10,7 @@
 import numpy as np
 
 
-def get_path(input_image, threshold=142):
+def get_path(input_image, threshold=140):
     im_array = np.array(input_image)
 
     red_chan = np.ndarray.flatten(im_array[:, :, 0])
