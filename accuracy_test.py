@@ -11,11 +11,11 @@ wb = load_workbook(excel_path)
 ws = wb["Sheet2"]
 
 i = 1
-for threshold in range(140, 160):
+for threshold in range(110, 151):
     accuracy = compute_accuracy(threshold)
     print("Accuracy for {} is: {}".format(threshold, accuracy))
     ws['A{}'.format(i + 1)] = threshold
-    ws['C{}'.format(i + 1)] = accuracy
+    ws['B{}'.format(i + 1)] = accuracy
     i += 1
 
 wb.save(excel_path)

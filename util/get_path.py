@@ -10,7 +10,7 @@
 import numpy as np
 
 
-def get_path(input_image, threshold=140):
+def get_path(input_image, threshold=137):
     im_array = np.array(input_image)
 
     red_chan = np.ndarray.flatten(im_array[:, :, 0])
@@ -44,9 +44,10 @@ def get_path(input_image, threshold=140):
     green_c2 = green_range > pixel_range_threshold
     blue_c2 = blue_range > pixel_range_threshold
 
-    if conditions_count >= 2:  # return path=1 if 2 or more conditions are True
+    if conditions_count == 3:
         path = 1  # just CLAHE (Image will probably show coloration if passed through Dehazenet)
     else:
         path = 2  # just Dehazenet (Image will probably not show coloration if passed through Dehazenet)
 
+    # print("Predicted path: ", path)
     return path

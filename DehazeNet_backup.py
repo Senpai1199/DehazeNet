@@ -103,7 +103,7 @@ if __name__ == '__main__':
     else:
         im_path = sys.argv[1]
     src = cv2.imread(im_path)
-    path = get_path(src, threshold=140)
+    path = get_path(src, threshold=137)
     if path == 1:
         dehazed_image = apply_CLAHE(src)
     else:
