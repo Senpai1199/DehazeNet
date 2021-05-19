@@ -96,6 +96,25 @@ def Recover(im, t, A, tx=0.1):
     return res
 
 
+def dehaze_image(src):
+    """
+        Receives a hazy src image and returns dehazed image after passing
+        through Dehazenet.
+    """
+    height = src.shape[0]
+    width = src.shape[1]
+    templateFile = 'DehazeFcnTemplate.prototxt'
+    EditFcnProto(templateFile, height, width)
+    I = src / 255.0
+    dark = DarkChannel(I, 15)
+    A = AtmLight(I, dark)
+    te = TransmissionEstimate(im_path, height, width)
+    t = TransmissionRefine(src, te)
+    J = Recover(I, t, A, 0.1)
+    dehazed_image = J * 255
+    return dehazed_image
+
+
 if __name__ == '__main__':
     if not len(sys.argv) == 2:
         print('Usage: python DeHazeNet.py haze_img_path')
@@ -107,22 +126,12 @@ if __name__ == '__main__':
     if path == 1:
         dehazed_image = apply_CLAHE(src)
     else:
-        height = src.shape[0]
-        width = src.shape[1]
-        templateFile = 'DehazeFcnTemplate.prototxt'
-        EditFcnProto(templateFile, height, width)
-        I = src / 255.0
-        dark = DarkChannel(I, 15)
-        A = AtmLight(I, dark)
-        te = TransmissionEstimate(im_path, height, width)
-        t = TransmissionRefine(src, te)
-        J = Recover(I, t, A, 0.1)
+        dehazed_image = dehaze_image(src)
         # cv2.imshow('TransmissionEstimate', te)
         # cv2.imshow('TransmissionRefine', t)
         # cv2.imshow('Origin', src)
         # cv2.imshow('Dehaze', J)
         # cv2.waitKey(0)
-        dehazed_image = J * 255
     save_path = im_path[:-4] + '_Dehaze' + im_path[-4:len(im_path)]
     cv2.imwrite(save_path, dehazed_image)
     print("Dehazed image saved!")
