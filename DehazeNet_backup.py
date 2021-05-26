@@ -96,7 +96,7 @@ def Recover(im, t, A, tx=0.1):
     return res
 
 
-def dehaze_image(src):
+def dehaze_image(src, im_path):
     """
         Receives a hazy src image and returns dehazed image after passing
         through Dehazenet.
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     if path == 1:
         dehazed_image = apply_CLAHE(src)
     else:
-        dehazed_image = dehaze_image(src)
+        dehazed_image = dehaze_image(src, im_path)
         # cv2.imshow('TransmissionEstimate', te)
         # cv2.imshow('TransmissionRefine', t)
         # cv2.imshow('Origin', src)

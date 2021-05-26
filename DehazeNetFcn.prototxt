@@ -2,7 +2,7 @@ name: "Dehaze_fullconv"
 input: "data"
 input_dim: 1
 input_dim: 3
-input_dim: 428
+input_dim: 748
 input_dim: 565
 
 layer {
@@ -63,7 +63,7 @@ layer {
     shape {
       dim: 0
       dim: 4
-      dim: 424
+      dim: 744
       dim: 561
     }
   }

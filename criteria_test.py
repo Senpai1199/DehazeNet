@@ -17,7 +17,7 @@ wb = load_workbook(excel_path)
 ws = wb['Sheet1']
 
 
-def compute_accuracy(threshold=137):
+def compute_accuracy(threshold=117):
     # print(wb.sheetnames)
     # print(ws['A1'].value)
     correct = 0
@@ -28,15 +28,15 @@ def compute_accuracy(threshold=137):
         i += 1
         im_path = with_coloration_path + filename
         predicted_path = get_path(cv2.imread(im_path), threshold)
-        # ws['A{}'.format(i + 1)] = filename
-        # ws['C{}'.format(i + 1)] = predicted_path
+        ws['A{}'.format(i + 1)] = filename
+        ws['C{}'.format(i + 1)] = predicted_path
         correct_path = ws['B{}'.format(i + 1)].value
         if predicted_path == correct_path:
-            # ws['D{}'.format(i + 1)] = "Yes"
+            ws['D{}'.format(i + 1)] = "Yes"
             correct += 1
         else:
-            pass
-            # ws['D{}'.format(i + 1)] = "No"
+            # pass
+            ws['D{}'.format(i + 1)] = "No"
 
     for filename in os.listdir(without_coloration_path):
         # print("Inside second loop")
@@ -45,23 +45,23 @@ def compute_accuracy(threshold=137):
         predicted_path = get_path(
             cv2.imread(im_path),
             threshold)  # pass threshold as well to get_path()
-        # ws['A{}'.format(i + 1)] = filename
-        # ws['C{}'.format(i + 1)] = predicted_path
+        ws['A{}'.format(i + 1)] = filename
+        ws['C{}'.format(i + 1)] = predicted_path
         correct_path = ws['B{}'.format(i + 1)].value
         if predicted_path == correct_path:
-            # ws['D{}'.format(i + 1)] = "Yes"
+            ws['D{}'.format(i + 1)] = "Yes"
             correct += 1
         else:
-            pass
-            # ws['D{}'.format(i + 1)] = "No"
+            # pass
+            ws['D{}'.format(i + 1)] = "No"
 
     accuracy = (correct / i) * 100
-    return accuracy
+    # return accuracy
 
-    # wb.save(excel_path)
-    # print("Script complete and excel saved!")
-    # print("Path prediction Accuracy for threshold {}: {} ".format(
-    #     threshold, accuracy))
+    wb.save(excel_path)
+    print("Script complete and excel saved!")
+    print("Path prediction Accuracy for threshold {}: {} ".format(
+        threshold, accuracy))
 
 
-# compute_accuracy(137)
+compute_accuracy(117)
