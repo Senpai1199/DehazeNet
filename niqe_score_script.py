@@ -9,7 +9,6 @@ import os
 import cv2
 from util.niqe import niqe
 from util.CLAHE import apply_CLAHE
-from DehazeNet_backup import dehaze_image
 import numpy as np
 
 with_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/testForImageCharacteristics/with-coloration/'
@@ -20,7 +19,7 @@ dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/out
 
 excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test.xlsx'
 wb = load_workbook(excel_path)
-ws = wb['Sheet3']
+ws = wb['NIQE']
 
 
 def niqe_scores():

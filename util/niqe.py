@@ -1,3 +1,7 @@
+"""
+    Script to compute NIQE score for an image (Referenceless Index)
+"""
+
 import math
 from os.path import dirname, join
 
