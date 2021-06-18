@@ -9,6 +9,7 @@ import os
 import cv2
 from sewar.full_ref import uqi  # external lib to compute UQI score
 from util.CLAHE import apply_CLAHE
+from util.Adaptive_Enhance import adaptive_enhance
 import numpy as np
 
 with_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/testForImageCharacteristics/with-coloration/'
@@ -18,7 +19,7 @@ dehazenet_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/ima
 dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_without_coloration/'
 gt_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/gt/'
 
-excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test.xlsx'
+excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_AdaptiveClahe+Gamma2.xlsx'
 wb = load_workbook(excel_path)
 ws = wb['UQI']
 
@@ -44,7 +45,8 @@ def uqi_scores():
         ws['C{}'.format(i + 1)] = uqi_dehaze
 
         if predicted_path == 1:
-            ws['D{}'.format(i + 1)] = uqi(gt_img, apply_CLAHE(inp_img))
+            ws['D{}'.format(i + 1)] = uqi(
+                gt_img, adaptive_enhance(apply_CLAHE(inp_img)))
         else:
             ws['D{}'.format(i + 1)] = uqi_dehaze
 
@@ -83,7 +85,8 @@ def uqi_scores():
         ws['C{}'.format(i + 1)] = uqi_dehaze
 
         if predicted_path == 1:
-            ws['D{}'.format(i + 1)] = uqi(gt_img, apply_CLAHE(inp_img))
+            ws['D{}'.format(i + 1)] = uqi(
+                gt_img, adaptive_enhance(apply_CLAHE(inp_img)))
         else:
             ws['D{}'.format(i + 1)] = uqi_dehaze
 
