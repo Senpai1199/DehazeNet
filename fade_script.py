@@ -20,7 +20,7 @@ without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/testF
 dehazenet_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_with_coloration/'
 dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_without_coloration/'
 
-excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_CLAHE.xlsx'
+excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_Adaptive+CLAHE.xlsx'
 wb = load_workbook(excel_path)
 ws = wb['FADE']
 
@@ -44,7 +44,7 @@ def fade_scores():
         ws['C{}'.format(i + 1)] = fade_dehazenet
 
         if predicted_path == 1:
-            enhanced_img = apply_CLAHE(inp_img)
+            enhanced_img = apply_CLAHE(adaptive_enhance(inp_img))
             ws['D{}'.format(i + 1)] = compute_fade(enhanced_img)
         else:
             ws['D{}'.format(i + 1)] = fade_dehazenet
@@ -87,7 +87,7 @@ def fade_scores():
         ws['C{}'.format(i + 1)] = fade_dehazenet
 
         if predicted_path == 1:
-            enhanced_img = apply_CLAHE(inp_img)
+            enhanced_img = apply_CLAHE(adaptive_enhance(inp_img))
             ws['D{}'.format(i + 1)] = compute_fade(enhanced_img)
         else:
             ws['D{}'.format(i + 1)] = fade_dehazenet

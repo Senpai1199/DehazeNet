@@ -25,12 +25,9 @@ def get_path(input_image, threshold=117):
     green_range = np.amax(green_chan)
     blue_range = np.amax(blue_chan)
 
-    pixel_threshold = threshold  # threshold pixel brightness value (trial and error)
-    pixel_range_threshold = 98
-
-    red_c1 = mean_red > pixel_threshold
-    green_c1 = mean_green > pixel_threshold
-    blue_c1 = mean_blue > pixel_threshold
+    red_c1 = mean_red > threshold
+    green_c1 = mean_green > threshold
+    blue_c1 = mean_blue > threshold
 
     conditions_count = 0
     if red_c1:
@@ -40,14 +37,12 @@ def get_path(input_image, threshold=117):
     if blue_c1:
         conditions_count += 1
 
-    red_c2 = red_range > pixel_range_threshold
-    green_c2 = green_range > pixel_range_threshold
-    blue_c2 = blue_range > pixel_range_threshold
-
     if conditions_count == 3:
-        path = 1  # just CLAHE (Image will probably show coloration if passed through Dehazenet)
+        # just CLAHE (Image will probably show coloration if passed through Dehazenet)
+        path = 1
     else:
-        path = 2  # just Dehazenet (Image will probably not show coloration if passed through Dehazenet)
+        # just Dehazenet (Image will probably not show coloration if passed through Dehazenet)
+        path = 2
 
     # print("Predicted path: ", path)
     return path

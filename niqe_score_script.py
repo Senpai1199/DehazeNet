@@ -19,7 +19,7 @@ without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/testF
 dehazenet_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_with_coloration/'
 dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_without_coloration/'
 
-excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_AdaptiveClahe+Gamma2.xlsx'
+excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_Adaptive+CLAHE.xlsx'
 wb = load_workbook(excel_path)
 ws = wb['NIQE']
 
@@ -43,7 +43,7 @@ def niqe_scores():
         ws['C{}'.format(i + 1)] = niqe_dehazenet
 
         if predicted_path == 1:
-            enhanced_img = adaptive_enhance(apply_CLAHE(inp_img))
+            enhanced_img = apply_CLAHE(adaptive_enhance(inp_img))
             ws['D{}'.format(i + 1)] = niqe(enhanced_img)
         else:
             ws['D{}'.format(i + 1)] = niqe_dehazenet
@@ -86,7 +86,7 @@ def niqe_scores():
         ws['C{}'.format(i + 1)] = niqe_dehazenet
 
         if predicted_path == 1:
-            enhanced_img = adaptive_enhance(apply_CLAHE(inp_img))
+            enhanced_img = apply_CLAHE(adaptive_enhance(inp_img))
             ws['D{}'.format(i + 1)] = niqe(enhanced_img)
         else:
             ws['D{}'.format(i + 1)] = niqe_dehazenet

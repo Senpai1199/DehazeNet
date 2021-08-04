@@ -9,6 +9,7 @@ import os
 import cv2
 from sewar.full_ref import psnr  # external lib to compute PSNR
 from util.CLAHE import apply_CLAHE
+# from util.gamma_correction import gamma_correction
 from util.Adaptive_Enhance import adaptive_enhance
 import numpy as np
 
@@ -19,10 +20,9 @@ dehazenet_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/ima
 dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_without_coloration/'
 gt_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/gt/'
 
-excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_AdaptiveClahe+Gamma2.xlsx'
+excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_Adaptive+CLAHE.xlsx'
 wb = load_workbook(excel_path)
 ws = wb['PSNR']
-
 
 def psnr_scores():
     i = 0
@@ -46,7 +46,7 @@ def psnr_scores():
 
         if predicted_path == 1:
             ws['D{}'.format(i + 1)] = psnr(
-                gt_img, adaptive_enhance(apply_CLAHE(inp_img)))
+                gt_img, apply_CLAHE(adaptive_enhance(inp_img)))
         else:
             ws['D{}'.format(i + 1)] = psnr_dehaze
 
@@ -86,7 +86,7 @@ def psnr_scores():
 
         if predicted_path == 1:
             ws['D{}'.format(i + 1)] = psnr(
-                gt_img, adaptive_enhance(apply_CLAHE(inp_img)))
+                gt_img, apply_CLAHE(adaptive_enhance(inp_img)))
         else:
             ws['D{}'.format(i + 1)] = psnr_dehaze
 

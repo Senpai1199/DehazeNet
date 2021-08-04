@@ -18,9 +18,9 @@ without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/testF
 dehazenet_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_with_coloration/'
 dehazenet_without_coloration_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/images_without_coloration/'
 gt_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/gt/'
-enhanced_image_save_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/GammaCorrection1/'
+enhanced_image_save_path = '/mnt/c/Users/Administrator/Desktop/SOTS/outdoor/processed_images/AdaptiveEnhance+CLAHE/'
 
-excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_GammaCorrection1.xlsx'
+excel_path = '/mnt/c/Users/Administrator/Desktop/criteria-test_Adaptive+CLAHE.xlsx'
 wb = load_workbook(excel_path)
 ws = wb['TMQI-1']
 
@@ -38,7 +38,7 @@ def tmqi_scores():
         inp_img = cv2.imread(im_path)
         predicted_path = get_path(inp_img, 117)  # threshold=117
         ws['A{}'.format(i + 1)] = filename
-        ws['B{}'.format(i + 1)] = compute_tmqi(gt_img, im_path)
+        # ws['B{}'.format(i + 1)] = compute_tmqi(gt_img, im_path)
         # dehazenet_image = dehazenet_coloration_path + '{}_finalWithoutCLAHE.jpg'.format(
         #     filename[:-4])
         # tmqi_dehaze = compute_tmqi(gt_img, dehazenet_image)
@@ -80,7 +80,7 @@ def tmqi_scores():
         inp_img = cv2.imread(im_path)
         predicted_path = get_path(inp_img, 117)  # threshold=117
         ws['A{}'.format(i + 1)] = filename
-        ws['B{}'.format(i + 1)] = compute_tmqi(im_path, gt_img)
+        # ws['B{}'.format(i + 1)] = compute_tmqi(im_path, gt_img)
         # dehazenet_image = dehazenet_without_coloration_path + '{}_finalWithoutCLAHE.jpg'.format(
         #     filename[:-4])
         # tmqi_dehaze = compute_tmqi(dehazenet_image, gt_img)
